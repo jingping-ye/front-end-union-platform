@@ -1,0 +1,88 @@
+{
+  "name": "document-template",
+  "version": "1.0.0-0",
+  "private": false,
+  "description": "文档模板",
+  "author": "jingping.ye <jingping.ye@kingstarfintech.com>",
+  "scripts": {
+    "dev": "vuepress dev .",
+    "build": "vuepress build . --dest docs",
+    "log": "conventional-changelog --config ./node_modules/vue-cli-plugin-commitlint/lib/log -i CHANGELOG.md -s -r 0",
+    "commit": "npm run log && git add . && git cz",
+    "preview": "serve docs -S"
+  },
+  "files": [],
+  "dependencies": {
+    "core-js": "^2.6.11",
+    "vue": "^2.6.11"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.4.0",
+    "@vue/cli-plugin-eslint": "~4.4.0",
+    "@vue/cli-service": "~4.4.0",
+    "ant-design-vue": "^1.6.2",
+    "babel-eslint": "^10.1.0",
+    "babel-plugin-component": "^1.1.1",
+    "chalk": "^4.1.0",
+    "commitizen": "^4.0.3",
+    "commitlint": "^8.2.0",
+    "conventional-changelog-cli": "^2.0.34",
+    "cross-env": "^7.0.2",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^6.2.2",
+    "highlight.js": "~9.18.1",
+    "husky": "^3.0.9",
+    "inquirer": "^7.2.0",
+    "node-sass": "^4.14.1",
+    "right-pad": "^1.0.1",
+    "sass-loader": "^8.0.2",
+    "serve": "^11.3.2",
+    "vue-cli-plugin-commitlint": "~1.0.12",
+    "vue-clipboard2": "^0.3.1",
+    "vue-highlight.js": "^3.1.0",
+    "vue-template-compiler": "^2.6.11",
+    "vuepress": "^1.5.2",
+    "vuepress-theme-antdocs": "^1.1.1"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "bugs": {
+    "url": ""
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/vue-cli-plugin-commitlint/lib/cz"
+    }
+  },
+  "homepage": "x",
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "keywords": [
+    "vue"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "x"
+  }
+}

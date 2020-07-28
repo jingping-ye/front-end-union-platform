@@ -1,0 +1,124 @@
+const nav = [
+  {
+    text: "快速入门与学习",
+    items: [
+      {
+        text: "HTML",
+        link: "/html/",
+      },
+      {
+        text: "CSS",
+        link: "/css/",
+      },
+      {
+        text: "JavaScript",
+        link: "/javascript",
+      },
+      {
+        text: "ES6",
+        link: "/es6/",
+      },
+      {
+        text: "浏览器",
+        link: "/browser/",
+      },
+      {
+        text: "调试",
+        link: "/debugger/",
+      },
+      {
+        text: "框架",
+        link: "/framework",
+        items: [
+          {
+            text: "Vue",
+            link: "/framework/vue",
+          },
+          {
+            text: "React",
+            link: "/framework/react",
+          },
+          {
+            text: "NodeJs",
+            link: "/framework/nodejs",
+          },
+        ],
+      },
+      {
+        text: "工具",
+        link: "/tool/",
+        items: [
+          {
+            text: "git",
+            link: "/tool/git",
+          },
+          {
+            text: "npm",
+            link: "/tool/npm",
+          },
+          {
+            text: "vscode",
+            link: "/tool/vscode",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    text: "脚手架",
+    items: [
+      {
+        text: "ky-vant-demo",
+        link: "/scaffold/ky",
+      },
+    ],
+  },
+  {
+    text: "组件库",
+    items: [
+      {
+        text: "web组件库",
+        link: "comb/web",
+      },
+    ],
+  },
+  { text: "常用工具函数", link: "/toolFunc/" },
+  { text: "开发流程及规范", link: "/specs/" },
+  {
+    text: "集成解决方法",
+    link: "/solution/",
+    items: [
+      {
+        text: "vue项目搭建",
+        link: "/solution/vue",
+      },
+      {
+        text: "博客",
+        link: "/solution/blog",
+      },
+      {
+        text: "小型文档系统",
+        link: "/solution/docsify",
+      },
+      {
+        text: "大型文档系统",
+        link: "/solution/ant-press-docs",
+      },
+    ],
+  },
+  {
+    text: "Demo",
+    items: [
+      {
+        text: "锦州银行POC",
+        link: "/demo/",
+      },
+      {
+        text: "实物金DEMO",
+        link: "/demo/",
+      },
+    ],
+  },
+];
+
+module.exports = nav;
