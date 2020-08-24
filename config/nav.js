@@ -32,15 +32,19 @@ const nav = [
         items: [
           {
             text: "Vue",
-            link: "/framework/vue",
+            link: "/framework/vue/",
           },
           {
             text: "React",
-            link: "/framework/react",
+            link: "/framework/react/",
           },
           {
             text: "NodeJs",
             link: "/framework/nodejs",
+          },
+          {
+            text: "微信小程序",
+            link: "/framework/wx/",
           },
         ],
       },
@@ -50,15 +54,19 @@ const nav = [
         items: [
           {
             text: "git",
-            link: "/tool/git",
+            link: "/tool/git/",
           },
           {
             text: "npm",
-            link: "/tool/npm",
+            link: "/tool/npm/",
           },
           {
             text: "vscode",
-            link: "/tool/vscode",
+            link: "/tool/vscode/",
+          },
+          {
+            text: "nvm",
+            link: "/tool/nvm/",
           },
         ],
       },
@@ -82,7 +90,7 @@ const nav = [
       },
     ],
   },
-  { text: "常用工具函数", link: "/toolFunc/" },
+  { text: "常用工具函数", link: "/func/" },
   { text: "开发流程及规范", link: "/specs/" },
   {
     text: "集成解决方法",
@@ -111,11 +119,11 @@ const nav = [
     items: [
       {
         text: "锦州银行POC",
-        link: "/demo/",
+        link: "http://10.254.3.21/jinzhou/#/",
       },
       {
-        text: "实物金DEMO",
-        link: "/demo/",
+        text: "实物金贵金属商城",
+        link: "http://10.254.3.21/glod/#/entry",
       },
     ],
   },
