@@ -35,6 +35,14 @@ const nav = [
             link: "/framework/vue/",
           },
           {
+            text: "Vue-Router",
+            link: "/framework/router/",
+          },
+          {
+            text: "Vuex",
+            link: "/framework/vuex/",
+          },
+          {
             text: "React",
             link: "/framework/react/",
           },

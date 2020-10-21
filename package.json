@@ -9,11 +9,13 @@
     "build": "vuepress build . --dest docs",
     "log": "conventional-changelog --config ./node_modules/vue-cli-plugin-commitlint/lib/log -i CHANGELOG.md -s -r 0",
     "commit": "npm run log && git add . && git cz",
-    "preview": "serve docs -S"
+    "preview": "serve docs -S",
+    "mail": "node email/index.js"
   },
   "files": [],
   "dependencies": {
     "core-js": "^2.6.11",
+    "email": "^0.2.6",
     "vue": "^2.6.11"
   },
   "devDependencies": {
@@ -34,8 +36,11 @@
     "husky": "^3.0.9",
     "inquirer": "^7.2.0",
     "node-sass": "^4.14.1",
+    "ora": "^5.0.0",
     "right-pad": "^1.0.1",
     "sass-loader": "^8.0.2",
+    "scp2": "^0.5.0",
+    "sendmail": "^1.6.1",
     "serve": "^11.3.2",
     "vue-cli-plugin-commitlint": "~1.0.12",
     "vue-clipboard2": "^0.3.1",
