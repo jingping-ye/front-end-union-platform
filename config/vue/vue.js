@@ -65,7 +65,7 @@ const vue = [
         path: "/framework/vue/组件/组件挂载",
       },
       {
-        title: "组价通信",
+        title: "组件通信",
         path: "/framework/vue/组件/组件通信",
       },
       {

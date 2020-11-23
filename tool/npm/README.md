@@ -1,14 +1,16 @@
 # npm
 
-## 注意
+## 1. 注意
 
-当下载 nodeJs 时，npm 也随之下载了。
+当下载 Node.js 时，npm 也随之下载了。下载完毕后，检查npm包和下载的`Node.js`版本是否对应。
 
-## 什么是包
+[Node.js版本及对应的npm包](https://nodejs.org/en/download/releases/)
+
+## 2. 什么是包
 
 包就一堆封装起来的代码，目的是抽象或总结解决问题的方法，避免重复解决问题。包可以是一个文件，也可以是多个文件。
 
-## npm 的作用
+## 3. npm 的作用
 
 1. 引入包
 
@@ -18,7 +20,7 @@
 
    通过 cdn 引入代码库的形式，容易造成代码包之间版本兼容等问题。npm 可以管理包和包之间的关系和包的版本。
 
-## npm 操作
+## 4. npm 操作
 
 1. 生成一个管理文件 package.json
 
@@ -69,9 +71,18 @@
    npm run *<scripts>
    ```
 
-## 发布包
+7. 设置镜像源
 
-### 会用到的命令
+   > 镜像源指的是我们的npm包从哪个镜像池下载。你可以把镜像池想作我们手机上的应用商店（手机自带的应用商店，应用宝...），这里即是规定包的来源（从哪儿下载）。
+
+   ```js
+   npm config set registry https://registry.npm.taobao.org/      //设置为淘宝镜像源
+   npm config set registry https://registry.npmjs.org/           // 设置为默认镜像源(npm)
+   ```
+
+## 5. 创建并发布包
+
+### 5.1 会用到的命令
 
 ```sh
 npm adduser 注册
@@ -88,18 +99,18 @@ npm version patch/minor/major（补丁/小改/大改）xxx（版本号eg：v1.1.
 npm version patch
 ```
 
-### 流程
+### 5.2 流程
 
 1. 在 npm 上注册账号
 2. 发布文件中使用`npm init`生成一个包管理文件
 3. 如果第一次登陆，使用`npm adduser`添加账户信息，否则使用`npm login`即可。
 4. 如果是更新包，那么要修改`package.json`中的版本号。
 5. 使用`npm pulish`发布，发布后就可以在自己的 npm 包管理中看到了。
-6. 删除包: `npm unpublish 包名@版本名`来删除（只有包发布 24 小时才难删除）
+6. 删除包: `npm unpublish 包名@版本名`来删除（包发布 24 小时后才可以删除）
 7. 包警告:`npm deprecate 包`表示包已经不再维护。
 8. 忽略代码，写入`.gitignore`或者`.npmignore`就可以了。
 
-### 自定义发布 package.json 信息说明
+### 5.3 自定义发布 package.json 信息说明
 
 - package name(包名字)
 - version(包版本)
@@ -111,13 +122,13 @@ npm version patch
 - author(作者)
 - license: (ISC)(包遵循什么样的开源协议)
 
-### 发布作用域包
+### 5.4 发布作用域包
 
 > 作用域用于将相关包分组在一起，并为 npm 模块创建一个名称空间(类似于域)。这里有更详细的解释。
 >
 > 如果一个包的名称以@开头，那么它就是一个有作用域的包。范围是@和斜杠之间的所有内容。
 
-#### 初始化作用域包
+#### 5.4.1 初始化作用域包
 
 要创建有作用域的包，只需使用以作用域开头的包名。
 
@@ -137,7 +148,7 @@ npm init --scope=username
 
 **npm config set scope username**
 
-#### 如何发布作用域包
+#### 5.4.2 如何发布作用域包
 
 默认情况下，作用域包是私有的。要发布私有模块，您需要是付费的私有模块用户。
 
@@ -147,7 +158,7 @@ npm init --scope=username
 npm publish --access=public
 ```
 
-#### 使用作用域包
+#### 5.4.3 使用作用域包
 
 要使用有作用域的包，只需在使用包名的任何地方包含作用域。
 
@@ -173,7 +184,43 @@ npm install @username/project-name --save
 var projectName = require("@username/project-name")
 ```
 
-## 其他
+### 5.5 其他
+
+#### 5.5.1 为包创建软链接
+
+当我们的包被应用到应用程序中，比如vue程序，那么在配置运行脚本时，假设入口是`index.js`文件，我们会这样配置：
+
+```js
+"scripts":{
+    "run":"node ./my-npm-package/index.js"
+}
+```
+
+这种，路径过长，而且表意不明，软链接可以解决这个问题。
+
+我们在包的入口`index.js`文件顶部加入如下：表示使用node运行该文件。
+
+```bash
+#!/usr/bin/env node
+```
+
+在包的`package.json`加入以下项（指定执行的入口）：
+
+```bash
+"bin": {
+    "run-package": "./index.js"
+},
+```
+
+那么，在vue应用中的执行脚本只需要如下配置，即可直接执行`./my-npm-package/index.js`文件：
+
+```js
+"scripts":{
+    "run", "run-package [args]"
+}
+```
+
+## 6. 其他
 
 ```js
 npm search xxx 搜索包
@@ -182,11 +229,11 @@ npm publish --access=public：发布作用域包，将默认的私有模块更�
 npm install @username/project-name（作用域包名） --save：使用作用域包
 ```
 
-## package.json
+## 7. package.json
 
 > 管理本地 npm 包的工具
 
-### 创建该文件
+### 7.1 创建
 
 ```sh
 npm init  // 手动配置
@@ -203,3 +250,6 @@ npm init -y // 生成默认的文件
 - `keywords`:关键字
 - `author`:作者
 - `license`: 许可
+
+
+
