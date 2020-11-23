@@ -11,9 +11,9 @@ const sidebar = {
   "/framework/vue/": [...vue],
   "/framework/router/": [...vueRouter],
   "/framework/vuex/": [...vuexRouter],
+  "/framework/axios/": [...axiosRouter],
   "/framework/wx/": [...wxRouter],
   "/tool/": ["git/", "npm/", "nvm/", "vscode/"],
   "/specs/": ["", "工作量评估", "代码审核", "其他"],
-  "/axios/": [...axiosRouter],
 };
 module.exports = sidebar;
