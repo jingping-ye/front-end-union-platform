@@ -248,7 +248,7 @@
 
 - [css&sass 开发规范](https://www.bookstack.cn/read/AirbnbCSSSassCN/README.md)
 - [Javascript 开发规范](https://www.bookstack.cn/read/AirbnbJavaScriptStyleCN/README.md)
-- [vue 开发规范](https://doc.vue-js.com/v2/style-guide/)
+- [vue 开发规范](/framework/vue/开发规范)
 
 ## Git 提交规范
 

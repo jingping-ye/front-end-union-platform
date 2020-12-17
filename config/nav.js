@@ -55,6 +55,10 @@ const nav = [
           //   link: "/framework/nodejs",
           // },
           {
+            text: "uni-app",
+            link: "/framework/uni-app/",
+          },
+          {
             text: "微信小程序",
             link: "/framework/wx/",
           },
