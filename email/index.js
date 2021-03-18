@@ -3,7 +3,7 @@ const sendmail = require("sendmail")();
 sendmail(
   {
     from: "no-reply@yourdomain.com",
-    to: "jingping.ye@kingstarfintech.com",
+    to: "1104639669@qq.com",
     subject: "test sendmail",
     html: "Mail of test sendmail ",
   },

@@ -88,12 +88,21 @@ const nav = [
       },
     ],
   },
+  // {
+  //   text: "脚手架",
+  //   items: [
+  //     {
+  //       text: "ky-vant-demo",
+  //       link: "https://github.com/jingping-ye/ky-vant-demo",
+  //     },
+  //   ],
+  // },
   {
-    text: "脚手架",
+    text: "手把手系列",
     items: [
       {
-        text: "ky-vant-demo",
-        link: "https://github.com/jingping-ye/ky-vant-demo",
+        text: "手把手入门vue",
+        link: "/first-step/start-vue/",
       },
     ],
   },
@@ -130,19 +139,6 @@ const nav = [
   //     },
   //   ],
   // },
-  {
-    text: "Demo",
-    items: [
-      {
-        text: "锦州银行POC",
-        link: "http://10.254.3.21/jinzhou/#/",
-      },
-      {
-        text: "实物金贵金属商城",
-        link: "http://10.254.3.21/glod/#/entry",
-      },
-    ],
-  },
 ];
 
 module.exports = nav;

@@ -1,17 +1,10 @@
-# 封装HTTP请求工具
+# 封装 HTTP 请求工具
 
-> 使用uView的http请求工具进行封装，参考：http://uviewui.com/js/http.html；我们这里假设后台凭token认证。
+> 使用 uView 的 http 请求工具进行封装，参考：http://uviewui.com/js/http.html；我们这里假设后台凭token认证。
 
-1. 建立http拦截器：新建`src/plugins/http.plugin.js`，写入如下内容：
+1. 建立 http 拦截器：新建`src/plugins/http.plugin.js`，写入如下内容：
 
 ```js
-/*
- * @Author: jingping.ye@kingstarfintech.com
- * @Date: 2020-12-09 14:32:21
- * @Last Modified by: jingping.ye@kingstarfintech.com
- * @Last Modified time: 2020-12-16 17:25:17
- * @Description: http请求工具
- */
 const install = (Vue, vm) => {
   Vue.prototype.$u.http.setConfig({
     baseUrl: "", // 项目的baseUrl
@@ -77,14 +70,13 @@ export default {
 2. 在`main.js`中引入
 
 ```js
-import httpPlugin from './plugins/http.plugin.js';
+import httpPlugin from "./plugins/http.plugin.js";
 
 const app = new Vue({
-    ... App, 
-    store
+  ...App,
+  store,
 });
 
 // 使用http插件，传入app实例
 Vue.use(httpPlugin, app);
 ```
-
