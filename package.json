@@ -3,7 +3,7 @@
   "version": "1.0.0-0",
   "private": false,
   "description": "文档模板",
-  "author": "jingping.ye <1104639669.ye@qq.com>",
+  "author": "jingping.ye <1104639669@qq.com>",
   "scripts": {
     "dev": "vuepress dev .",
     "build": "vuepress build . --dest docs",
