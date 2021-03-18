@@ -6,6 +6,7 @@ module.exports = {
   theme: "antdocs",
   title: "风车 | 前端同一构建平台",
   description: "快速构建文档系统",
+  base: "/front-end-union-platform/",
   port: "8888",
   themeConfig: {
     backToTop: true,
