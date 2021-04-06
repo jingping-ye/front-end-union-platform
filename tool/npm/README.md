@@ -251,5 +251,67 @@ npm init -y // 生成默认的文件
 - `author`:作者
 - `license`: 许可
 
+## 参数传递
+
+> 如果scripts脚本中是用node运行js脚本，那么可以直接在命令行中写入命令，通过process.argv获取
+
+- process.argv获取的是跟node.js 启动进程相关的参数。
+
+- 以下命令均在`index.js`文件中输出`process.argv`
+
+1. 不传入
+```bash
+"start": "node index.js"
+```
+```bash
+[
+  'C:\\Program Files\\nodejs\\node.exe',
+  'C:\\Users\\jingping.ye\\Desktop\\test\\index.js'
+]
+```
+
+2. 传入一组
+```bash
+"start": "node index.js name=vine",
+```
+```bash
+[
+  'C:\\Program Files\\nodejs\\node.exe',
+  'C:\\Users\\jingping.ye\\Desktop\\test\\index.js',
+  'name=vine'
+]
+```
+
+3. 传入多组
+> 使用空格分隔即可
+
+```bash
+ "start": "node index.js name=vine age=18",
+```
+
+```bash
+[
+  'C:\\Program Files\\nodejs\\node.exe',
+  'C:\\Users\\jingping.ye\\Desktop\\test\\index.js',
+  'name=vine',
+  'age=18'
+]
+```
+
+4. 一组传入多个参数
+> 不使用空格分隔，随便使用个空格分隔即可
+```bash
+ "start": "node index.js person=vine,18",
+```
+
+```bash
+[
+  'C:\\Program Files\\nodejs\\node.exe',
+  'C:\\Users\\jingping.ye\\Desktop\\test\\index.js',
+  'person=vine,18'
+]
+```
+
+
 
 
