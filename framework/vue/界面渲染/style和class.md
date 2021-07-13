@@ -293,5 +293,6 @@
 
 ## 三、其他
 
-1. 原来style中带`-`的属性全部转为小驼峰法。
+1. 原来style中带`-`的属性在对象中需要全部转为小驼峰写法。
+2. 当 `v-bind:style` 使用需要添加[浏览器引擎前缀](https://developer.mozilla.org/zh-CN/docs/Glossary/Vendor_Prefix)的 CSS property 时，如 `transform`，Vue.js 会自动侦测并添加相应的前缀。
 
