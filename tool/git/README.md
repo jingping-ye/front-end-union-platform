@@ -44,5 +44,15 @@
 
    `git reset --hard origin/master`
 
+## 2. 查看和修改配置
+
+```shell
+# 查看全局配置
+git config --global -l
+
+# .gitconfig文件中包含了git配置
+cd ~/.gitconfig 
+```
+
 
 
