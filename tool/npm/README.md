@@ -2,9 +2,9 @@
 
 ## 1. 注意
 
-当下载 Node.js 时，npm 也随之下载了。下载完毕后，检查npm包和下载的`Node.js`版本是否对应。
+当下载 Node.js 时，npm 也随之下载了。下载完毕后，检查 npm 包和下载的`Node.js`版本是否对应。
 
-[Node.js版本及对应的npm包](https://nodejs.org/en/download/releases/)
+[Node.js 版本及对应的 npm 包](https://nodejs.org/en/download/releases/)
 
 ## 2. 什么是包
 
@@ -73,12 +73,20 @@
 
 7. 设置镜像源
 
-   > 镜像源指的是我们的npm包从哪个镜像池下载。你可以把镜像池想作我们手机上的应用商店（手机自带的应用商店，应用宝...），这里即是规定包的来源（从哪儿下载）。
+   > 镜像源指的是我们的 npm 包从哪个镜像池下载。你可以把镜像池想作我们手机上的应用商店（手机自带的应用商店，应用宝...），这里即是规定包的来源（从哪儿下载）。
 
    ```js
    npm config set registry https://registry.npm.taobao.org/      //设置为淘宝镜像源
    npm config set registry https://registry.npmjs.org/           // 设置为默认镜像源(npm)
    ```
+
+8. 清除缓存
+
+```bash
+ npm cache clean --force
+```
+
+
 
 ## 5. 创建并发布包
 
@@ -97,6 +105,10 @@ npm deprecate xxx message（包名 信息）：代替删除操作，其他人下
 npm deprecate xxx@1.2.1 message（包名@版本号 信息）：代替删除操作，其他人下载我们指定版本的包时给出警告
 npm version patch/minor/major（补丁/小改/大改）xxx（版本号eg：v1.1.1）：自动更新版本
 npm version patch
+npm search xxx 搜索包
+npm init --scope=username：创建作用域包，将范围作为选项添加到命令
+npm publish --access=public：发布作用域包，将默认的私有模块更改为公共模块
+npm install @username/project-name（作用域包名） --save：使用作用域包
 ```
 
 ### 5.2 流程
@@ -188,7 +200,7 @@ var projectName = require("@username/project-name")
 
 #### 5.5.1 为包创建软链接
 
-当我们的包被应用到应用程序中，比如vue程序，那么在配置运行脚本时，假设入口是`index.js`文件，我们会这样配置：
+当我们的包被应用到应用程序中，比如 vue 程序，那么在配置运行脚本时，假设入口是`index.js`文件，我们会这样配置：
 
 ```js
 "scripts":{
@@ -198,7 +210,7 @@ var projectName = require("@username/project-name")
 
 这种，路径过长，而且表意不明，软链接可以解决这个问题。
 
-我们在包的入口`index.js`文件顶部加入如下：表示使用node运行该文件。
+我们在包的入口`index.js`文件顶部加入如下：表示使用 node 运行该文件。
 
 ```bash
 #!/usr/bin/env node
@@ -212,7 +224,7 @@ var projectName = require("@username/project-name")
 },
 ```
 
-那么，在vue应用中的执行脚本只需要如下配置，即可直接执行`./my-npm-package/index.js`文件：
+那么，在 vue 应用中的执行脚本只需要如下配置，即可直接执行`./my-npm-package/index.js`文件：
 
 ```js
 "scripts":{
@@ -220,20 +232,11 @@ var projectName = require("@username/project-name")
 }
 ```
 
-## 6. 其他
-
-```js
-npm search xxx 搜索包
-npm init --scope=username：创建作用域包，将范围作为选项添加到命令
-npm publish --access=public：发布作用域包，将默认的私有模块更改为公共模块
-npm install @username/project-name（作用域包名） --save：使用作用域包
-```
-
-## 7. package.json
+## 6. package.json
 
 > 管理本地 npm 包的工具
 
-### 7.1 创建
+### 6.1 创建
 
 ```sh
 npm init  // 手动配置
@@ -251,18 +254,22 @@ npm init -y // 生成默认的文件
 - `author`:作者
 - `license`: 许可
 
-## 参数传递
+### 6.2 npm-script
 
-> 如果scripts脚本中是用node运行js脚本，那么可以直接在命令行中写入命令，通过process.argv获取
+#### 6.2.1 参数传递
 
-- process.argv获取的是跟node.js 启动进程相关的参数。
+> 如果 scripts 脚本中是用 node 运行 js 脚本，那么可以直接在命令行中写入命令，通过 process.argv 获取
+
+- process.argv 获取的是跟 node.js 启动进程相关的参数。
 
 - 以下命令均在`index.js`文件中输出`process.argv`
 
 1. 不传入
+
 ```bash
 "start": "node index.js"
 ```
+
 ```bash
 [
   'C:\\Program Files\\nodejs\\node.exe',
@@ -271,9 +278,11 @@ npm init -y // 生成默认的文件
 ```
 
 2. 传入一组
+
 ```bash
 "start": "node index.js name=vine",
 ```
+
 ```bash
 [
   'C:\\Program Files\\nodejs\\node.exe',
@@ -283,7 +292,8 @@ npm init -y // 生成默认的文件
 ```
 
 3. 传入多组
-> 使用空格分隔即可
+   
+   > 使用空格分隔即可
 
 ```bash
  "start": "node index.js name=vine age=18",
@@ -299,7 +309,9 @@ npm init -y // 生成默认的文件
 ```
 
 4. 一组传入多个参数
-> 不使用空格分隔，随便使用个空格分隔即可
+   
+   > 不使用空格分隔，随便使用个空格分隔即可
+
 ```bash
  "start": "node index.js person=vine,18",
 ```
@@ -312,6 +324,21 @@ npm init -y // 生成默认的文件
 ]
 ```
 
+#### 6.2.2 并行&串行多个`scripts`命令
 
+> 这里遵循bash命令的规则
 
+| 命令 | 说明                                                       |
+| :--- | :--------------------------------------------------------- |
+| &&   | 顺序执行多条命令，当碰到执行出错的命令后将不执行后面的命令 |
+| &    | 并行执行多条命令                                           |
+| \|\| | 顺序执行多条命令，当碰到执行正确的命令后将不执行后面的命令 |
+| \|   | 管道符                                                     |
 
+#### 6.2.3 支持并行自行的npm包
+
+- concurrently:跨平台，同时运行多个命令（并发）。
+
+- npm-run-all:跨平台，一种可以并行或顺序运行多个 npm 脚本的 CLI 工具。
+
+  
