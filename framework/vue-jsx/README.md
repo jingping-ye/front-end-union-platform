@@ -1,3 +1,12 @@
+# vue-jsx
+
+## 参考文档
+
+- [jsx-next](https://github.com/vuejs/jsx-next)
+- [jsx](https://github.com/vuejs/jsx)
+- [babel-plugin-transform-vue-jsx](https://github.com/vuejs/babel-plugin-transform-vue-jsx)
+- [babel-preset-vue](https://github.com/vuejs/babel-preset-vue)
+
 ## slot
 
 ### 默认 slot
