@@ -340,6 +340,8 @@ export default JsxTest;
 
 ## v-if
 
+> 使用三元表达式替换
+
 ```js
 import Vue from "vue";
 const state = Vue.observable({ msg: "hello", count: 0, isIf: true });
@@ -381,6 +383,8 @@ export default JsxTest;
 ```
 
 ## 循环
+
+> 相当于 vue 中的`v-for`,这里用`array.map()`实现
 
 ```js
 import Vue from "vue";
@@ -464,6 +468,273 @@ const JsxTest = {
     let compSet1 = [compA, compB, compC];
     let compSet2 = [compC, compB, compA];
     return <div>{state.isShow ? compSet1 : compSet2}</div>;
+  },
+};
+
+export default JsxTest;
+```
+
+## class 和 style
+
+> 插件会自动合并属性
+
+```scss
+.hello {
+  font-size: 16px;
+  font-weight: bold;
+}
+.color-red {
+  color: red;
+}
+.margin-left-20 {
+  margin-left: 20px;
+}
+```
+
+```js
+import "./jsxStyle.scss";
+const JsxTest = {
+  name: "JsxTest",
+  render() {
+    const someClass = ["margin-left-20", "color-red"];
+    const someStyle = {
+      marginLeft: "20px",
+      color: "red",
+    };
+    return (
+      <div>
+        <div className='hello' class={someClass}>
+          Hello World
+        </div>
+        <div style='font-size:16px;font-weight:20px;' style={someStyle}>
+          Hello World
+        </div>
+      </div>
+    );
+  },
+};
+
+export default JsxTest;
+```
+
+## 注册组件
+
+> 在 jsx 中，如果组件元素是以小写开头，那么需要在`components`这项配置中注册。如果是以大写开头，那么无需在`components`中注册，而是可以直接使用(实际中，小写组件也无需注册)
+
+```js
+import Comp from "./comp";
+const JsxTest = {
+  name: "JsxTest",
+  render() {
+    return (
+      <div>
+        <Comp>Hello World</Comp>
+      </div>
+    );
+  },
+};
+
+export default JsxTest;
+```
+
+## `h`函数自动注入
+
+`const h = this.$createElement`会自动注入到方法(methods)和 getter 中，但是自定义函数和箭头函数不会自动生效
+
+```js
+Vue.component('jsx-example', {
+  render () { // h will be injected
+    return <div id="foo">bar</div>
+  },
+  methods:{
+    myMethod: function () { // h will be injected
+      return <div id="foo">bar</div>
+    }
+  },
+  },
+  myMethod: function () { // h will not be injected
+    return <div id="foo">bar</div>
+  },
+  someOtherMethod: () => { // h will not be injected
+    return <div id="foo">bar</div>
+  }
+})
+
+@Component
+class App extends Vue {
+  get computed () { // h will be injected
+    return <div id="foo">bar</div>
+  }
+}
+```
+
+## jsx 语法
+
+`createElement`语法：`createElement(ele, dataObject, subEle)`
+
+```js
+render (h) {
+  return h('div', {
+    // Component props
+    props: {
+      msg: 'hi',
+      onCustomEvent: this.customEventHandler
+    },
+    // normal HTML attributes
+    attrs: {
+      id: 'foo'
+    },
+    // DOM props
+    domProps: {
+      innerHTML: 'bar'
+    },
+    // Event handlers are nested under "on", though
+    // modifiers such as in v-on:keyup.enter are not
+    // supported. You'll have to manually check the
+    // keyCode in the handler instead.
+    on: {
+      click: this.clickHandler
+    },
+    // For components only. Allows you to listen to
+    // native events, rather than events emitted from
+    // the component using vm.$emit.
+    nativeOn: {
+      click: this.nativeClickHandler
+    },
+    // class is a special module, same API as `v-bind:class`
+    class: {
+      foo: true,
+      bar: false
+    },
+    // style is also same as `v-bind:style`
+    style: {
+      color: 'red',
+      fontSize: '14px'
+    },
+    // other special top-level properties
+    key: 'key',
+    ref: 'ref',
+    // assign the `ref` is used on elements/components with v-for
+    refInFor: true,
+    slot: 'slot'
+  })
+}
+
+```
+
+```js
+render (h) {
+  return (
+    <div
+      // normal attributes or prefix with on props.
+      id="foo"
+      propsOnCustomEvent={this.customEventHandler}
+      // DOM properties are prefixed with `domProps`
+      domPropsInnerHTML="bar"
+      // event listeners are prefixed with `on` or `nativeOn`
+      onClick={this.clickHandler}
+      nativeOnClick={this.nativeClickHandler}
+      // other special top-level properties
+      class={{ foo: true, bar: false }}
+      style={{ color: 'red', fontSize: '14px' }}
+      key="key"
+      ref="ref"
+      // assign the `ref` is used on elements/components with v-for
+      refInFor
+      slot="slot">
+    </div>
+  )
+}
+```
+
+## 指令
+
+- 使用`v-name={value}`的语法即可
+- vue 指令支持的范围有限，目前支持的有`v-model`、`v-show`、`v-on`
+- 大多数指令参数与修饰符是不支持的。解决方法如下：
+
+  - 使用`value`传递`-name={{ value, modifier: true }}`
+  - 使用原生的 vnode 语法
+
+  ```js
+  const directives = [{ name: "my-dir", value: 123, modifiers: { abc: true } }];
+
+  return <div {...{ directives }} />;
+  ```
+
+## mixin
+
+```js
+// mixins.js
+export default {
+  methods: {
+    HComp() {
+      return <h1>Hello</h1>;
+    },
+  },
+};
+```
+
+```js
+// renderFunc.js
+const methods = {
+  renderFunc() {
+    return <h1>Hello</h1>;
+  },
+};
+
+export default methods;
+```
+
+```js
+import Vue from "vue";
+import mixin from "./mixins.js";
+import methods from "./renderFunc";
+const state = Vue.observable({ msg: "hello" });
+
+const JsxTest = {
+  name: "JsxTest",
+  mixins: [mixin],
+  methods: {
+    ...methods,
+  },
+  render() {
+    return (
+      <div>
+        {this.renderFunc()}
+        {this.HComp()}
+        <input v-model={state.msg} /> {state.msg}
+      </div>
+    );
+  },
+};
+
+export default JsxTest;
+```
+
+## $watch
+
+```js
+import Vue from "vue";
+const state = Vue.observable({ msg: "hello" });
+
+const JsxTest = {
+  name: "JsxTest",
+  render() {
+    return (
+      <div>
+        <input v-model={state.msg} /> {state.msg}
+      </div>
+    );
+  },
+  created() {
+    this.$watch(
+      () => state.msg,
+      function (newV, oldV) {
+        console.log(newV, oldV);
+      },
+      { immediate: true }
+    );
   },
 };
 
