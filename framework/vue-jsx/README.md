@@ -125,93 +125,117 @@ export default JsxTest;
 
 假设存在组件`comp.vue`,需要在 jsx 中调用，最后在 jsx 在一个新的 vue 组件调用。
 
+- 组件 comp.vue
+
 ```vue
+<!-- comp.vue-->
 <template>
-  <div>
-    <comp>
-      <template #title="props"> 你好{{ props }} </template>
-    </comp>
+  <div style="border: 1px solid red">
+    <h1>标题：<slot name="slotTest" v-bind="someProps"></slot></h1>
   </div>
 </template>
 
 <script>
-import comp from "@/views/jsx/comp";
 export default {
-  name: "JsxIndex",
-  components: {
-    comp,
-  },
-};
-</script>
-```
-
-#### 使用 template 的`slot`语法
-
-```js
-// jsxTest.js
-import Comp from "./comp";
-const JsxTest = {
-  name: "JsxTest",
-  components: {
-    Comp,
-  },
-  render() {
-    let scopedSlots = { title: (scope) => this.$scopedSlots.title(scope) };
-    return <comp {...{ scopedSlots }}></comp>;
-  },
-};
-
-export default JsxTest;
-```
-
-```html
-<jsx-test>
-  <template #title="props"> 你好 {{props}} </template>
-</jsx-test>
-```
-
-#### 使用渲染函数实现`slot`
-
-```js
-// jsxTest.js
-import Comp from "./comp";
-const JsxTest = {
-  name: "JsxTest",
-  components: {
-    Comp,
-  },
-  render() {
-    let scopedSlots = { title: (props) => this.$attrs.renderFunc(props) };
-    return <comp {...{ scopedSlots }}></comp>;
-  },
-};
-
-export default JsxTest;
-```
-
-```vue
-<!-- jsxIndex.vue -->
-<template>
-  <div>
-    <jsx-test :renderFunc="renderFunc"> </jsx-test>
-  </div>
-</template>
-
-<script>
-import jsxTest from "@/views/jsx/jsxTest";
-export default {
-  name: "JsxIndex",
-  components: {
-    jsxTest,
-  },
+  name: "comp",
   data() {
     return {
-      renderFunc: (props) => <span>render部分{props.msg}</span>,
+      someProps: {
+        msg: "hello",
+      },
     };
   },
 };
 </script>
 ```
+
+- 最终调用:`JsxIndex.vue`
+
+```vue
+<template>
+  <div>
+    <jsx-test>
+      <template v-slot:testSlot="props">Hello World!{{ props }}</template>
+    </jsx-test>
+  </div>
+</template>
+
+<script>
+import jsxTest from "./jsxTest.js";
+export default {
+  name: "JsxIndex",
+  components: {
+    jsxTest,
+  },
+};
+</script>
+```
+
+#### jsx 中间组件`jsxTest.js`实现
+
+1. 使用`scopedSlots`属性。
+
+`scopedSlots`语法如下：
+
+```js
+const scopedSlots = {
+  [slotName]: (props) => [renderFunc(props)],
+};
+
+
+<component scopedSlots={scopedSlots}>
+```
+
+`scopedSlot`相当于如下声明：
+
+```vue
+<template slot="[slotName]">[renderContent...]</template>
+```
+
+```js
+// jsxTest.js
+import Comp from "./comp";
+const JsxTest = {
+  name: "JsxTest",
+  render() {
+    const scopedSlots = {
+      testSlot: (scope) => this.$scopedSlots.testSlot(scope),
+    };
+    return (
+      <div>
+        <Comp scopedSlots={scopedSlots}></Comp>
+      </div>
+    );
+  },
+};
+export default JsxTest;
+```
+
+2. 使用`named slots`:直接在渲染函数中使用`slot=[slotName]`的普通 slot 语法，这种方法无法传递 props;
+
+```js
+// jsxTest.js
+import Comp from "./comp";
+const JsxTest = {
+  name: "JsxTest",
+  render() {
+    return (
+      <div>
+        <Comp>
+          <template slot='testSlot'>{this.$scopedSlots.testSlot()}</template>
+        </Comp>
+      </div>
+    );
+  },
+};
+
+export default JsxTest;
+```
+
+### 两者的差别
+
+1. 在子组件中，是否可以用`$scopedSlots`和`$slots`属性获取到：在`jsx`中，直接使用`scopedSlots`属性，是可以在子组件中用`$scopedSlots`属性获取到，但是`$slots`不能直接获取到。使用`slot=[slotName]`的语法，在子组件中通过`$scopedSlots`和`$slots`均可以获取到。
+2. 两种同时存在时，优先执行`$scopedSlots`，执行`$scopedSlots`无效时，再执行`slot=[slotName]`
 
 ## 数据双向绑定
 
