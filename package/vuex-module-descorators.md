@@ -1,0 +1,2 @@
+# vuex-module-decorators
+

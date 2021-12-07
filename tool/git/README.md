@@ -11,6 +11,9 @@
 - 切换分支 `git checkout xx`
 - 删除本地分支 `git branch -d xx`
 - 删除远程分支 `git branch -r -d origin/xx` `git push origin :xx`
+- 查看提交文件状态：`git status`
+- 获取（查询）远程最新变更：`git fetch`
+- 将获取的变更合并到本地：`git pull`
 
 ## 常见问题及解决方法
 
@@ -40,3 +43,16 @@
 5. 把 HEAD 指向 master 最新版本。
 
    `git reset --hard origin/master`
+
+## 2. 查看和修改配置
+
+```shell
+# 查看全局配置
+git config --global -l
+
+# .gitconfig文件中包含了git配置
+cd ~/.gitconfig 
+```
+
+
+
